@@ -24,7 +24,6 @@ export function tickersFn() {
 
 	return {
 		get tickers() {
-			console.log(tickers);
 			return tickers;
 		},
 		setTickers
