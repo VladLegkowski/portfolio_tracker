@@ -21,7 +21,7 @@
 		<Form.Field {form} name="tickerSymbol">
 			<Form.Control let:attrs>
 				<Form.Label>Ticker name / symbol</Form.Label>
-				<Input {...attrs} bind:value={$formData.tickerSymbol} />
+				<Input {...attrs} bind:value={$formData.tickerSymbol} placeholder={`e.g. ${data.query || 'tesco'}`} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>

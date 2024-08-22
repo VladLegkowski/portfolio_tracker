@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Button } from '$lib/components/ui/button';
 	import PriceCell from "../../lib/components/features/price-cell/price-cell.svelte";
 	import * as Card from "../../lib/components/ui/card";
 	import * as Table from "../../lib/components/ui/table";
@@ -28,7 +29,7 @@
 				<Table.Body>
 					{#each data.bestMatches as ticker, i (i)}
 						<Table.Row>
-							<Table.Cell class="font-medium">{ticker['2. name']}</Table.Cell>
+							<Table.Cell class="font-medium"><Button variant="link">{ticker['2. name']}</Button></Table.Cell>
 							<Table.Cell class="font-medium">{ticker['1. symbol']}</Table.Cell>
 							<Table.Cell class="font-medium">{ticker['8. currency']}</Table.Cell>
 							<PriceCell price={data.price} />
