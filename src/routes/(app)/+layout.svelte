@@ -1,9 +1,9 @@
 <script lang="ts">
-	import '../app.css';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import * as Form from "$lib/components/ui/form";
-	import * as Table from "$lib/components/ui/table";
-	import * as Card from "$lib/components/ui/card";
+	import '../../app.css';
+	import { Input } from '../../lib/components/ui/input';
+	import * as Form from "../../lib/components/ui/form";
+	import * as Table from "../../lib/components/ui/table";
+	import * as Card from "../../lib/components/ui/card";
 	import { superForm } from 'sveltekit-superforms';
 
 	let { data, children } = $props();

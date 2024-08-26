@@ -22,3 +22,8 @@ export const plCalculationSchema = z.object({
 		.refine((val) => !isNaN(val), 'Realised P/L must be a numerical value')
 		.default(0)
 });
+
+export const loginSchema = z.object({
+	email: z.string().email('This is not a valid email.'),
+	password: z.string().min(6, 'Password must be 6 characters long')
+});

@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>727</IntrospectionStateNumber>
+      <IntrospectionStateNumber>740</IntrospectionStateNumber>
       <ServerVersion>15.8</ServerVersion>
       <StartupTime>1724441904</StartupTime>
       <TimeZones>true ACDT
@@ -800,7 +800,7 @@ false Zulu
 13517||10|C|G
 13517||-9223372036854775808|U|G
 13517||10|U|G</Grants>
-      <IntrospectionStateNumber>727</IntrospectionStateNumber>
+      <IntrospectionStateNumber>740</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>vlad.legkovskii</OwnerName>
     </database>
@@ -4218,8 +4218,8 @@ false Zulu
     <schema id="262" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>727</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-08-24.13:12:13</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>740</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-08-26.14:44:16</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>517</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4232,13 +4232,80 @@ false Zulu
       <StoredType>integer|0s</StoredType>
       <OwnerName>vlad.legkovskii</OwnerName>
     </sequence>
-    <table id="264" parent="262" name="positions">
+    <table id="264" parent="262" name="auth_user">
+      <ObjectId>16401</ObjectId>
+      <StateNumber>739</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>vlad.legkovskii</OwnerName>
+    </table>
+    <table id="265" parent="262" name="positions">
       <ObjectId>16386</ObjectId>
       <StateNumber>726</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>vlad.legkovskii</OwnerName>
     </table>
-    <column id="265" parent="264" name="id">
+    <table id="266" parent="262" name="user_session">
+      <ObjectId>16408</ObjectId>
+      <StateNumber>735</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>vlad.legkovskii</OwnerName>
+    </table>
+    <column id="267" parent="264" name="id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>732</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="268" parent="264" name="username">
+      <Position>2</Position>
+      <StateNumber>739</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="269" parent="264" name="password_hash">
+      <Position>3</Position>
+      <StateNumber>739</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="270" parent="264" name="auth_user_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16406</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>732</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <index id="271" parent="264" name="auth_user_username_key">
+      <ColNames>username</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16420</ObjectId>
+      <StateNumber>739</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="272" parent="264" name="auth_user_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16407</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>732</StateNumber>
+      <UnderlyingIndexId>16406</UnderlyingIndexId>
+    </key>
+    <key id="273" parent="264" name="auth_user_username_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16421</ObjectId>
+      <StateNumber>739</StateNumber>
+      <UnderlyingIndexId>16420</UnderlyingIndexId>
+    </key>
+    <column id="274" parent="265" name="id">
       <DefaultExpression>nextval(&apos;positions_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -4247,49 +4314,49 @@ false Zulu
       <SequenceId>16385</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="266" parent="264" name="symbol">
+    <column id="275" parent="265" name="symbol">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>726</StateNumber>
       <StoredType>varchar(10)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="267" parent="264" name="quantity">
+    <column id="276" parent="265" name="quantity">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>726</StateNumber>
       <StoredType>numeric(15,6 digit)|0s</StoredType>
       <TypeId>1700</TypeId>
     </column>
-    <column id="268" parent="264" name="break_even_price">
+    <column id="277" parent="265" name="break_even_price">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>726</StateNumber>
       <StoredType>numeric(15,6 digit)|0s</StoredType>
       <TypeId>1700</TypeId>
     </column>
-    <column id="269" parent="264" name="realised_pl">
+    <column id="278" parent="265" name="realised_pl">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>726</StateNumber>
       <StoredType>numeric(15,6 digit)|0s</StoredType>
       <TypeId>1700</TypeId>
     </column>
-    <column id="270" parent="264" name="created_at">
+    <column id="279" parent="265" name="created_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>6</Position>
       <StateNumber>726</StateNumber>
       <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="271" parent="264" name="updated_at">
+    <column id="280" parent="265" name="updated_at">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>7</Position>
       <StateNumber>726</StateNumber>
       <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <index id="272" parent="264" name="positions_pkey">
+    <index id="281" parent="265" name="positions_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16392</ObjectId>
@@ -4298,12 +4365,60 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="273" parent="264" name="positions_pkey">
+    <key id="282" parent="265" name="positions_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16393</ObjectId>
       <Primary>1</Primary>
       <StateNumber>726</StateNumber>
       <UnderlyingIndexId>16392</UnderlyingIndexId>
+    </key>
+    <column id="283" parent="266" name="id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>735</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="284" parent="266" name="expires_at">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>737</StateNumber>
+      <StoredType>timestamp with time zone|0s</StoredType>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="285" parent="266" name="user_id">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>735</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <foreign-key id="286" parent="266" name="user_session_user_id_fkey">
+      <ColNames>user_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16415</ObjectId>
+      <StateNumber>735</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16401</RefTableId>
+    </foreign-key>
+    <index id="287" parent="266" name="user_session_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16413</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>735</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="288" parent="266" name="user_session_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16414</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>735</StateNumber>
+      <UnderlyingIndexId>16413</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

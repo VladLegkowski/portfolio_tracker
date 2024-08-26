@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
+	import { Button } from '../../../lib/components/ui/button';
 	import { superForm } from 'sveltekit-superforms';
-	import * as Card from "../../lib/components/ui/card";
-	import { Input } from '../../lib/components/ui/input';
-	import * as Table from "../../lib/components/ui/table";
-	import * as HoverCard from "$lib/components/ui/hover-card";
-	import * as Drawer from "$lib/components/ui/drawer";
-	import * as Form from "$lib/components/ui/form";
+	import * as Card from "../../../lib/components/ui/card";
+	import { Input } from '../../../lib/components/ui/input';
+	import * as Table from "../../../lib/components/ui/table";
+	import * as HoverCard from "../../../lib/components/ui/hover-card";
+	import * as Drawer from "../../../lib/components/ui/drawer";
+	import * as Form from "../../../lib/components/ui/form";
 	let { data } = $props();
 	let drawerOpen = $state(false);
 

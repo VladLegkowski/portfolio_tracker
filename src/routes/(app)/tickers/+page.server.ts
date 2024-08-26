@@ -1,10 +1,10 @@
 import { redirect } from '@sveltejs/kit';
 import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import sql from '../../lib/db';
-import { plCalculationSchema, schema } from '../../lib/schemas';
-import type { Company } from '../../lib/types';
-import type { PageServerLoad } from './$types';
+import * as db from '../../../lib/server/db';
+import { plCalculationSchema, schema } from '../../../lib/schemas';
+import type { Company } from '../../../lib/types';
+import type { PageServerLoad } from '../../../../.svelte-kit/types/src/routes';
 
 export const load: PageServerLoad = async ({ url, fetch }) => {
 	const form = await superValidate(zod(plCalculationSchema));
@@ -39,30 +39,11 @@ export const actions = {
 	},
 	plCalculation: async ({ request }) => {
 		const form = await superValidate(request, zod(plCalculationSchema));
-
 		if (!form.valid) {
 			return fail(400, { form });
 		}
-
-		try {
-			const { symbol, quantity, breakEvenPrice, realisedPL } = form.data;
-
-			const [newPosition] = await sql`
-        INSERT INTO positions (symbol, quantity, break_even_price, realised_pl)
-        VALUES (${symbol}, ${quantity}, ${breakEvenPrice}, ${realisedPL})
-    	  RETURNING id, symbol, quantity, break_even_price, realised_pl
-			`;
-
-			return {
-				form,
-				newPosition
-			};
-		} catch (error) {
-			console.error('Database error:', error);
-			return fail(500, {
-				form,
-				error: 'Failed to save data to database'
-			});
-		}
+		const { symbol, quantity, breakEvenPrice, realisedPL } = form.data;
+		const [newPosition] = await db.createPosition(symbol, quantity, breakEvenPrice, realisedPL);
+		return { form, newPosition };
 	}
 };
