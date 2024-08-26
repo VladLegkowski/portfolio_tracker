@@ -1,8 +1,6 @@
-import type { LoadingState, Ticker } from './types';
+import type { LoadingState } from './types';
 
 let loadingState: LoadingState = $state(undefined);
-
-let tickers: Array<Ticker> | undefined = $state(undefined);
 
 export function loadingStateFn() {
 	function setLoadingState(state: LoadingState) {
@@ -14,18 +12,5 @@ export function loadingStateFn() {
 			return loadingState;
 		},
 		setLoadingState
-	};
-}
-
-export function tickersFn() {
-	function setTickers(tickersArray: Array<Ticker> | undefined) {
-		tickers = tickersArray;
-	}
-
-	return {
-		get tickers() {
-			return tickers;
-		},
-		setTickers
 	};
 }
