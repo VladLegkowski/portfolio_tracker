@@ -4,7 +4,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import * as db from '../../../lib/server/db';
 import { plCalculationSchema, schema } from '../../../lib/schemas';
 import type { Company } from '../../../lib/types';
-import type { PageServerLoad } from '../../../../.svelte-kit/types/src/routes';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url, fetch }) => {
 	const form = await superValidate(zod(plCalculationSchema));
@@ -37,13 +37,19 @@ export const actions = {
 		if (!form.valid) return fail(400, { form });
 		throw redirect(303, `/tickers?q=${encodeURIComponent(form.data.tickerSymbol)}`);
 	},
-	plCalculation: async ({ request }) => {
-		const form = await superValidate(request, zod(plCalculationSchema));
+	plCalculation: async (event) => {
+		const form = await superValidate(event.request, zod(plCalculationSchema));
 		if (!form.valid) {
 			return fail(400, { form });
 		}
 		const { symbol, quantity, breakEvenPrice, realisedPL } = form.data;
-		const [newPosition] = await db.createPosition(symbol, quantity, breakEvenPrice, realisedPL);
+		const [newPosition] = await db.createPosition({
+			symbol,
+			quantity,
+			breakEvenPrice,
+			realisedPL,
+			userId: event.locals.user?.id ?? ''
+		});
 		return { form, newPosition };
 	}
 };

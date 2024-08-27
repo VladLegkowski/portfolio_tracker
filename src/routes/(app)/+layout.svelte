@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../../app.css';
+	import { Button } from '../../lib/components/ui/button';
 	import { Input } from '../../lib/components/ui/input';
 	import * as Form from "../../lib/components/ui/form";
 	import * as Table from "../../lib/components/ui/table";
@@ -21,13 +22,14 @@
 	<form method="POST" action="?/tickers">
 		<Form.Field {form} name="tickerSymbol">
 			<Form.Control let:attrs>
-				<Form.Label>Ticker name / symbol</Form.Label>
+				<Form.Label>Hi, {data.user.id}, here you can search by ticker name / symbol</Form.Label>
 				<Input {...attrs} bind:value={$formData.tickerSymbol} placeholder={`e.g. ${data.query || 'tesco'}`} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
 		<Form.Button>Search</Form.Button>
 	</form>
+	<p>If you want to logout, <Button data-sveltekit-preload-data="tap" class="p-0" variant="link" href="/logout">click here</Button>.</p>
 	{@render children()}
 	{#if data.positions}
 		<Card.Root class="mt-2">

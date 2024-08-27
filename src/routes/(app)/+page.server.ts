@@ -8,7 +8,9 @@ import * as db from '../../lib/server/db';
 export const load: PageServerLoad = async (event) => {
 	const query = event.url.searchParams.get('q');
 	const form = await superValidate(event, zod(schema));
-	const positions = await db.getPositions();
+	const positions = event.locals.user?.id
+		? await db.getPositions(event.locals.user?.id)
+		: undefined;
 	return { form, query, positions };
 };
 

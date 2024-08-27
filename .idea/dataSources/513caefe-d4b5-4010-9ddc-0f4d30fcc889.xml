@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>740</IntrospectionStateNumber>
+      <IntrospectionStateNumber>790</IntrospectionStateNumber>
       <ServerVersion>15.8</ServerVersion>
       <StartupTime>1724441904</StartupTime>
       <TimeZones>true ACDT
@@ -800,7 +800,7 @@ false Zulu
 13517||10|C|G
 13517||-9223372036854775808|U|G
 13517||10|U|G</Grants>
-      <IntrospectionStateNumber>740</IntrospectionStateNumber>
+      <IntrospectionStateNumber>790</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>vlad.legkovskii</OwnerName>
     </database>
@@ -4218,207 +4218,189 @@ false Zulu
     <schema id="262" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>740</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-08-26.14:44:16</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>790</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-08-27.12:46:16</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>517</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
     <sequence id="263" parent="262" name="positions_id_seq">
-      <ObjectId>16385</ObjectId>
+      <ObjectId>16444</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>726</StateNumber>
+      <StateNumber>786</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>vlad.legkovskii</OwnerName>
     </sequence>
     <table id="264" parent="262" name="auth_user">
-      <ObjectId>16401</ObjectId>
-      <StateNumber>739</StateNumber>
+      <ObjectId>16437</ObjectId>
+      <StateNumber>788</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>vlad.legkovskii</OwnerName>
     </table>
     <table id="265" parent="262" name="positions">
-      <ObjectId>16386</ObjectId>
-      <StateNumber>726</StateNumber>
+      <ObjectId>16445</ObjectId>
+      <StateNumber>788</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>vlad.legkovskii</OwnerName>
     </table>
     <table id="266" parent="262" name="user_session">
-      <ObjectId>16408</ObjectId>
-      <StateNumber>735</StateNumber>
+      <ObjectId>16453</ObjectId>
+      <StateNumber>789</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>vlad.legkovskii</OwnerName>
     </table>
     <column id="267" parent="264" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>732</StateNumber>
+      <StateNumber>785</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
     <column id="268" parent="264" name="username">
       <Position>2</Position>
-      <StateNumber>739</StateNumber>
+      <StateNumber>785</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
     <column id="269" parent="264" name="password_hash">
       <Position>3</Position>
-      <StateNumber>739</StateNumber>
+      <StateNumber>785</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
     <index id="270" parent="264" name="auth_user_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16406</ObjectId>
+      <ObjectId>16442</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>732</StateNumber>
+      <StateNumber>785</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="271" parent="264" name="auth_user_username_key">
-      <ColNames>username</ColNames>
+    <key id="271" parent="264" name="auth_user_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16420</ObjectId>
-      <StateNumber>739</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-      <CollationNames>default</CollationNames>
-      <CollationIds>100</CollationIds>
-      <CollationParentNames>pg_catalog</CollationParentNames>
-    </index>
-    <key id="272" parent="264" name="auth_user_pkey">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16407</ObjectId>
+      <ObjectId>16443</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>732</StateNumber>
-      <UnderlyingIndexId>16406</UnderlyingIndexId>
+      <StateNumber>785</StateNumber>
+      <UnderlyingIndexId>16442</UnderlyingIndexId>
     </key>
-    <key id="273" parent="264" name="auth_user_username_key">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16421</ObjectId>
-      <StateNumber>739</StateNumber>
-      <UnderlyingIndexId>16420</UnderlyingIndexId>
-    </key>
-    <column id="274" parent="265" name="id">
-      <DefaultExpression>nextval(&apos;positions_id_seq&apos;::regclass)</DefaultExpression>
+    <column id="272" parent="265" name="id">
+      <IdentityKind>always</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>726</StateNumber>
+      <StateNumber>786</StateNumber>
       <StoredType>integer|0s</StoredType>
-      <SequenceId>16385</SequenceId>
+      <SequenceId>16444</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="275" parent="265" name="symbol">
-      <NotNull>1</NotNull>
+    <column id="273" parent="265" name="user_id">
       <Position>2</Position>
-      <StateNumber>726</StateNumber>
-      <StoredType>varchar(10)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="276" parent="265" name="quantity">
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StateNumber>726</StateNumber>
-      <StoredType>numeric(15,6 digit)|0s</StoredType>
-      <TypeId>1700</TypeId>
-    </column>
-    <column id="277" parent="265" name="break_even_price">
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-      <StateNumber>726</StateNumber>
-      <StoredType>numeric(15,6 digit)|0s</StoredType>
-      <TypeId>1700</TypeId>
-    </column>
-    <column id="278" parent="265" name="realised_pl">
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-      <StateNumber>726</StateNumber>
-      <StoredType>numeric(15,6 digit)|0s</StoredType>
-      <TypeId>1700</TypeId>
-    </column>
-    <column id="279" parent="265" name="created_at">
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-      <Position>6</Position>
-      <StateNumber>726</StateNumber>
-      <StoredType>timestamp|0s</StoredType>
-      <TypeId>1114</TypeId>
-    </column>
-    <column id="280" parent="265" name="updated_at">
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-      <Position>7</Position>
-      <StateNumber>726</StateNumber>
-      <StoredType>timestamp|0s</StoredType>
-      <TypeId>1114</TypeId>
-    </column>
-    <index id="281" parent="265" name="positions_pkey">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16392</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>726</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <key id="282" parent="265" name="positions_pkey">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16393</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>726</StateNumber>
-      <UnderlyingIndexId>16392</UnderlyingIndexId>
-    </key>
-    <column id="283" parent="266" name="id">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>735</StateNumber>
+      <StateNumber>786</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="284" parent="266" name="expires_at">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StateNumber>737</StateNumber>
+    <column id="274" parent="265" name="symbol">
+      <Position>3</Position>
+      <StateNumber>786</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="275" parent="265" name="quantity">
+      <Position>4</Position>
+      <StateNumber>786</StateNumber>
+      <StoredType>numeric|0s</StoredType>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="276" parent="265" name="break_even_price">
+      <Position>5</Position>
+      <StateNumber>786</StateNumber>
+      <StoredType>numeric|0s</StoredType>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="277" parent="265" name="realised_pl">
+      <Position>6</Position>
+      <StateNumber>786</StateNumber>
+      <StoredType>numeric|0s</StoredType>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="278" parent="265" name="created_at">
+      <DefaultExpression>now()</DefaultExpression>
+      <Position>7</Position>
+      <StateNumber>786</StateNumber>
       <StoredType>timestamp with time zone|0s</StoredType>
       <TypeId>1184</TypeId>
     </column>
-    <column id="285" parent="266" name="user_id">
+    <foreign-key id="279" parent="265" name="fk_user">
+      <ColNames>user_id</ColNames>
+      <ObjectId>16460</ObjectId>
+      <StateNumber>788</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16437</RefTableId>
+    </foreign-key>
+    <index id="280" parent="265" name="positions_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16451</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>786</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="281" parent="265" name="positions_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16452</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>786</StateNumber>
+      <UnderlyingIndexId>16451</UnderlyingIndexId>
+    </key>
+    <column id="282" parent="266" name="id">
       <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StateNumber>735</StateNumber>
+      <Position>1</Position>
+      <StateNumber>787</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <foreign-key id="286" parent="266" name="user_session_user_id_fkey">
+    <column id="283" parent="266" name="expires_at">
+      <Position>2</Position>
+      <StateNumber>787</StateNumber>
+      <StoredType>timestamp with time zone|0s</StoredType>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="284" parent="266" name="user_id">
+      <Position>3</Position>
+      <StateNumber>787</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <foreign-key id="285" parent="266" name="fk_user_session">
       <ColNames>user_id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16415</ObjectId>
-      <StateNumber>735</StateNumber>
+      <ObjectId>16465</ObjectId>
+      <StateNumber>789</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>16401</RefTableId>
+      <RefTableId>16437</RefTableId>
     </foreign-key>
-    <index id="287" parent="266" name="user_session_pkey">
+    <index id="286" parent="266" name="user_session_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16413</ObjectId>
+      <ObjectId>16458</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>735</StateNumber>
+      <StateNumber>787</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="288" parent="266" name="user_session_pkey">
+    <key id="287" parent="266" name="user_session_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16414</ObjectId>
+      <ObjectId>16459</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>735</StateNumber>
-      <UnderlyingIndexId>16413</UnderlyingIndexId>
+      <StateNumber>787</StateNumber>
+      <UnderlyingIndexId>16458</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

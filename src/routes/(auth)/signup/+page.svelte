@@ -1,8 +1,9 @@
 <script lang="ts">
-	import '../../app.css';
-	import * as Card from "../../lib/components/ui/card";
-	import * as Form from "../../lib/components/ui/form";
-	import { Input } from "../../lib/components/ui/input";
+	import '../../../app.css';
+	import { Button } from '../../../lib/components/ui/button';
+	import * as Card from "../../../lib/components/ui/card";
+	import * as Form from "../../../lib/components/ui/form";
+	import { Input } from "../../../lib/components/ui/input";
 	import { superForm } from 'sveltekit-superforms';
 
 	let { data } = $props();
@@ -10,7 +11,7 @@
 	const { form: formData, enhance } = form;
 </script>
 
-<Card.Root class="m-10 p-5">
+<Card.Root class="m-10 max-w-xl">
 	<Card.Header>
 		<Card.Title>
 			Signup form
@@ -37,5 +38,6 @@
 			</Form.Field>
 			<Form.Button>Submit</Form.Button>
 		</form>
+		<Button variant="link" href="/login" class="pl-0">Already have an account?</Button>
 	</Card.Content>
 </Card.Root>

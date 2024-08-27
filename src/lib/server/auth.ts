@@ -3,6 +3,7 @@ import { PostgresJsAdapter } from '@lucia-auth/adapter-postgresql';
 import { dev } from '$app/environment';
 import { env } from '$env/dynamic/private';
 import postgres from 'postgres';
+import type { DatabaseUser } from './db';
 
 const sql = postgres(env.DATABASE_URL);
 
@@ -18,8 +19,13 @@ export const lucia = new Lucia(adapter, {
 		}
 	},
 	getUserAttributes: (attributes) => {
-		return {
-			// Add any user attributes you want to expose here
-		};
+		return {};
 	}
 });
+
+declare module 'lucia' {
+	interface Register {
+		Lucia: typeof lucia;
+		DatabaseUserAttributes: Omit<DatabaseUser, 'id'>;
+	}
+}

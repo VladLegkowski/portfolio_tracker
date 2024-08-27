@@ -1,26 +1,41 @@
 import postgres from 'postgres';
 import { DATABASE_URL } from '$env/static/private';
 
+export type DatabaseUser = {
+	id: string;
+	username: string;
+	password_hash: string;
+};
+
 const sql = postgres(DATABASE_URL, {
 	ssl: false
+	// ssl: { rejectUnauthorized: false }
 });
 
-function getPositions() {
+function getPositions(userId: string) {
 	return sql`
-      SELECT * FROM positions
-      ORDER BY created_at DESC
-    `;
+    SELECT * FROM positions
+    WHERE user_id = ${userId}
+    ORDER BY created_at DESC
+`;
 }
 
-function createPosition(
-	symbol: string,
-	quantity: number,
-	breakEvenPrice: number,
-	realisedPL: number
-) {
+function createPosition({
+	symbol,
+	quantity,
+	breakEvenPrice,
+	realisedPL,
+	userId
+}: {
+	symbol: string;
+	quantity: number;
+	breakEvenPrice: number;
+	realisedPL: number;
+	userId: string;
+}) {
 	return sql`
-      INSERT INTO positions (symbol, quantity, break_even_price, realised_pl)
-          VALUES (${symbol}, ${quantity}, ${breakEvenPrice}, ${realisedPL})
+      INSERT INTO positions (user_id, symbol, quantity, break_even_price, realised_pl)
+          VALUES (${userId}, ${symbol}, ${quantity}, ${breakEvenPrice}, ${realisedPL})
               RETURNING id, symbol, quantity, break_even_price, realised_pl
 	`;
 }
@@ -32,4 +47,10 @@ function signup(userId: string, username: string, passwordHash: string) {
 	`;
 }
 
-export { sql, getPositions, createPosition, signup };
+function getUser(userName: string) {
+	return sql`
+      SELECT * FROM auth_user where username = ${userName}
+      `;
+}
+
+export { sql, getPositions, createPosition, signup, getUser };
