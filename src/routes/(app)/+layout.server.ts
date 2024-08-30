@@ -11,6 +11,5 @@ export const load: LayoutServerLoad = async (event) => {
 	const positions = event.locals.user?.id
 		? await db.getPositions(event.locals.user?.id)
 		: mockPositions;
-	console.log(positions);
 	return { form, query, positions, user: event.locals.user };
 };

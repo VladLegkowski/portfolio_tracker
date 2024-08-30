@@ -6,27 +6,53 @@ import type { Company } from '../../../lib/types';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url, fetch, locals }) => {
-	const form = await superValidate(zod(plCalculationSchema));
-	const query = url.searchParams.get('q');
-	const response = await fetch(
-		`https://financialmodelingprep.com/api/v3/search?query=${query}&limit=1&apikey=iaOInAu5KJYQmmxp5RvXGn3wyJp92yMz`
-	);
-	const companies = (await response.json()) ?? [];
+	try {
+		const form = await superValidate(zod(plCalculationSchema));
+		const query = url.searchParams.get('q');
 
-	const companiesWithPrices = await Promise.all(
-		companies.map(async (company: Company) => {
-			const priceResponse = await fetch(
-				`https://financialmodelingprep.com/api/v3/quote-short/${company.symbol}?apikey=iaOInAu5KJYQmmxp5RvXGn3wyJp92yMz`
-			);
-			const priceData = await priceResponse.json();
-			return {
-				...company,
-				price: priceData[0]?.price ?? 'N/A'
-			};
-		})
-	);
+		if (!query) {
+			throw new Error('No query parameter provided.');
+		}
 
-	return { companies: companiesWithPrices, query, form, user: locals.user };
+		const response = await fetch(
+			`https://financialmodelingprep.com/api/v3/search?query=${query}&limit=4&apikey=6iKfC9b2HsSekHxvoKB6yfYmwU8k5bEt`
+		);
+
+		if (!response.ok) {
+			throw new Error(`Failed to fetch company data: ${response.statusText}`);
+		}
+
+		const companies = (await response.json()) ?? [];
+
+		const companiesWithPrices = await Promise.all(
+			companies.map(async (company: Company) => {
+				try {
+					const priceResponse = await fetch(
+						`https://financialmodelingprep.com/api/v3/quote-short/${company.symbol}?apikey=6iKfC9b2HsSekHxvoKB6yfYmwU8k5bEt`
+					);
+
+					if (!priceResponse.ok) {
+						throw new Error(
+							`Failed to fetch price data for ${company.symbol}: ${priceResponse.statusText}`
+						);
+					}
+
+					const priceData = await priceResponse.json();
+					return {
+						...company,
+						price: priceData[0]?.price ?? 'N/A'
+					};
+				} catch (priceError) {
+					console.error(priceError);
+					return { ...company, price: 'N/A' };
+				}
+			})
+		);
+
+		return { companies: companiesWithPrices, query, form, user: locals.user };
+	} catch (error) {
+		console.error(error);
+	}
 };
 
 export const actions = {
