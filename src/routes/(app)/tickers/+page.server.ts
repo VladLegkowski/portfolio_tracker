@@ -2,17 +2,32 @@ import { redirect } from '@sveltejs/kit';
 import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import * as db from '../../../lib/server/db';
-import { plCalculationSchema, schema } from '../../../lib/schemas';
+import { schema, plCalculationSchema } from '../../../lib/schemas';
 import type { Company } from '../../../lib/types';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ url, fetch }) => {
+export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 	const form = await superValidate(zod(plCalculationSchema));
 	const query = url.searchParams.get('q');
 	const response = await fetch(
-		`https://financialmodelingprep.com/api/v3/search?query=${query}&limit=3&apikey=iaOInAu5KJYQmmxp5RvXGn3wyJp92yMz`
+		`https://financialmodelingprep.com/api/v3/search?query=${query}&limit=1&apikey=iaOInAu5KJYQmmxp5RvXGn3wyJp92yMz`
 	);
-	const companies = (await response.json()) ?? [];
+	const companies = [
+		{
+			symbol: 'PRAA',
+			name: 'PRA Group, Inc.',
+			currency: 'USD',
+			stockExchange: 'NasdaqGS',
+			exchangeShortName: 'NASDAQ'
+		},
+		{
+			symbol: 'PAAS',
+			name: 'Pan American Silver Corp.',
+			currency: 'USD',
+			stockExchange: 'NasdaqGS',
+			exchangeShortName: 'NASDAQ'
+		}
+	];
 
 	const companiesWithPrices = await Promise.all(
 		companies.map(async (company: Company) => {
@@ -27,7 +42,7 @@ export const load: PageServerLoad = async ({ url, fetch }) => {
 		})
 	);
 
-	return { companies: companiesWithPrices, query, form };
+	return { companies: companiesWithPrices, query, form, user: locals.user };
 };
 
 export const actions = {
@@ -37,19 +52,19 @@ export const actions = {
 		if (!form.valid) return fail(400, { form });
 		throw redirect(303, `/tickers?q=${encodeURIComponent(form.data.tickerSymbol)}`);
 	},
-	plCalculation: async (event) => {
-		const form = await superValidate(event.request, zod(plCalculationSchema));
+	plCalculation: async ({ request, locals }) => {
+		const form = await superValidate(request, zod(plCalculationSchema));
 		if (!form.valid) {
 			return fail(400, { form });
 		}
 		const { symbol, quantity, breakEvenPrice, realisedPL } = form.data;
-		const [newPosition] = await db.createPosition({
+		await db.createPosition({
 			symbol,
 			quantity,
 			breakEvenPrice,
 			realisedPL,
-			userId: event.locals.user?.id ?? ''
+			userId: locals.user?.id ?? ''
 		});
-		return { form, newPosition };
+		return { form, success: true };
 	}
 };

@@ -16,6 +16,9 @@ export const load: PageServerLoad = async (event) => {
 
 export const actions = {
 	tickers: async (event) => {
+		if (!event.locals.user) {
+			return redirect(302, '/login');
+		}
 		const data = await event.request.formData();
 		const form = await superValidate(data, zod(schema));
 		if (!form.valid) return fail(400, { form });

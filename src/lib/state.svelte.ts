@@ -1,16 +1,16 @@
-import type { LoadingState } from './types';
+import type { DrawerState } from './types';
 
-let loadingState: LoadingState = $state(undefined);
+let drawerState: DrawerState = $state(false);
 
-export function loadingStateFn() {
-	function setLoadingState(state: LoadingState) {
-		loadingState = state;
+export function drawerStateFn() {
+	function setDrawerState(state: DrawerState) {
+		drawerState = state;
 	}
 
 	return {
-		get loadingState(): LoadingState {
-			return loadingState;
+		get drawerState(): DrawerState {
+			return drawerState;
 		},
-		setLoadingState
+		setDrawerState
 	};
 }

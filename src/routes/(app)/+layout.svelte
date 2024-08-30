@@ -5,6 +5,7 @@
 	import * as Form from "../../lib/components/ui/form";
 	import * as Table from "../../lib/components/ui/table";
 	import * as Card from "../../lib/components/ui/card";
+	import * as Tooltip from "../../lib/components/ui/tooltip";
 	import { superForm } from 'sveltekit-superforms';
 
 	let { data, children } = $props();
@@ -12,24 +13,45 @@
 	const { form: formData } = form;
 </script>
 
-<style>
-    .slot-wrapper {
-        padding: 8rem;
-    }
-</style>
+<style></style>
 
-<div class="slot-wrapper">
+<nav class="flex justify-end p-8">
+	{#if !data?.user}
+		<Button href="/login">Login</Button>
+		<Button href="/signup" variant="link">Signup</Button>
+	{:else if data?.user}
+		<Button href="logout" variant="ghost">Logout</Button>
+	{/if}
+</nav>
+<div class="p-12 pt-0">
 	<form method="POST" action="?/tickers">
 		<Form.Field {form} name="tickerSymbol">
 			<Form.Control let:attrs>
-				<Form.Label>Hi, {data.user.id}, here you can search by ticker name / symbol</Form.Label>
-				<Input {...attrs} bind:value={$formData.tickerSymbol} placeholder={`e.g. ${data.query || 'tesco'}`} />
+				{#if data.user?.id}
+				<Form.Label>Hi, {data.user?.id}, here you can search by ticker name / symbol</Form.Label>
+				{/if}
+				{#if !data.user?.id}
+					<Form.Label>Login use search to find by ticker name / symbol</Form.Label>
+				{/if}
+					<Input {...attrs} bind:value={$formData.tickerSymbol} placeholder={`e.g. ${data.query || 'tesco'}`} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
-		<Form.Button>Search</Form.Button>
+
+			{#if !data.user?.id}
+				<Tooltip.Root openDelay={100}>
+					<Tooltip.Trigger asChild let:builder>
+						<Button href="/login" builders={[builder]}>Search</Button>
+					</Tooltip.Trigger>
+				<Tooltip.Content>
+					<p>You will need to login first</p>
+				</Tooltip.Content>
+				</Tooltip.Root>
+				{:else}
+				<Form.Button>Search</Form.Button>
+			{/if}
+
 	</form>
-	<p>If you want to logout, <Button data-sveltekit-preload-data="tap" class="p-0" variant="link" href="/logout">click here</Button>.</p>
 	{@render children()}
 	{#if data.positions}
 		<Card.Root class="mt-2">

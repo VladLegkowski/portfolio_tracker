@@ -1,4 +1,4 @@
-export type LoadingState = 'loading' | 'success' | undefined;
+export type DrawerState = boolean;
 
 export type Company = {
 	symbol: string;

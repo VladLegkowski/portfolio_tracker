@@ -15,7 +15,10 @@ export const plCalculationSchema = z.object({
 	breakEvenPrice: z
 		.number()
 		.positive('Break-even price must be positive')
-		.multipleOf(0.0001, 'Break-even price must have at most 4 decimal places')
+		.refine((val) => {
+			const parts = val.toString().split('.');
+			return parts.length === 1 || parts[1].length <= 8;
+		}, 'Break-even price must have at most 8 digits after the decimal point')
 		.refine((val) => !isNaN(val), 'Break-even price must be a numerical value'),
 	realisedPL: z
 		.number()
