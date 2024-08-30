@@ -1,22 +1,38 @@
 <script lang="ts">
 	import '../../app.css';
+	import { goto } from '$app/navigation';
 	import { Button } from '../../lib/components/ui/button';
 	import { Input } from '../../lib/components/ui/input';
 	import * as Form from "../../lib/components/ui/form";
 	import * as Table from "../../lib/components/ui/table";
 	import * as Card from "../../lib/components/ui/card";
 	import * as Tooltip from "../../lib/components/ui/tooltip";
+	import { toast } from "svelte-sonner";
+	import { Toaster } from "$lib/components/ui/sonner";
 	import { superForm } from 'sveltekit-superforms';
 
 	let { data, children } = $props();
 	const form = superForm(data.form);
 	const { form: formData } = form;
+
+	$effect(() => {
+		if (!data?.user) {
+			toast.info("This is a demo view", {
+				description: "You need to be logged in to use the app",
+				action: {
+					label: "Login",
+					onClick: () => goto('/login')
+				}
+			})
+		}
+	})
 </script>
 
 <style></style>
 
 <nav class="flex justify-end p-8">
 	{#if !data?.user}
+		<Toaster />
 		<Button href="/login">Login</Button>
 		<Button href="/signup" variant="link">Signup</Button>
 	{:else if data?.user}
@@ -24,7 +40,7 @@
 	{/if}
 </nav>
 <div class="p-12 pt-0">
-	<form method="POST" action="?/tickers">
+	<form method="POST" action="/?/tickers">
 		<Form.Field {form} name="tickerSymbol">
 			<Form.Control let:attrs>
 				{#if data.user?.id}

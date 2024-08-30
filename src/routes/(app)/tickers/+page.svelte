@@ -9,12 +9,10 @@
 	import * as Drawer from "../../../lib/components/ui/drawer";
 	import * as Form from "../../../lib/components/ui/form";
 	import { CircleCheck } from 'lucide-svelte';
+
 	let { data, form: actionForm } = $props();
-	let submitting = $state(false)
 	let submitted = $state(actionForm?.success)
-	const form = superForm(data.form, {
-		onSubmit: () => submitting = true,
-	})
+	const form = superForm(data.form)
 	const { form: formData, enhance, reset } = form;
 
 	$effect(() => {
@@ -65,7 +63,6 @@
 								<Drawer.Root onClose={() => {
 									reset()
 									submitted = false;
-									submitting = false;
 								}}>
 										{#if !data.user?.id}
 											<Tooltip.Root openDelay={100}>
@@ -118,6 +115,7 @@
 											<div class="min-h-[15.10rem] p-4 flex flex-col gap-16">
 												<p>Your position been added.</p>
 												<CircleCheck size="100" class="self-center" />
+												<Input autofocus class="opacity-0" />
 											</div>
 											<Drawer.Footer>
 												<Drawer.Close>Cancel (esc)</Drawer.Close>
