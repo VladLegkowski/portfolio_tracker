@@ -12,7 +12,12 @@
 
 	let { data, form: actionForm } = $props();
 	let submitted = $state(actionForm?.success)
-	const form = superForm(data.form)
+	const form = superForm(data.form ??
+		{ symbol: '',
+			quantity: 0,
+			breakEvenPrice: 0,
+			realisedPL: 0
+		})
 	const { form: formData, enhance, reset } = form;
 
 	$effect(() => {

@@ -1,73 +1,18 @@
 <script lang="ts">
 	import '../../app.css';
-	import { goto } from '$app/navigation';
-	import { Button } from '../../lib/components/ui/button';
-	import { Input } from '../../lib/components/ui/input';
-	import * as Form from "../../lib/components/ui/form";
 	import * as Table from "../../lib/components/ui/table";
 	import * as Card from "../../lib/components/ui/card";
-	import * as Tooltip from "../../lib/components/ui/tooltip";
-	import { toast } from "svelte-sonner";
-	import { Toaster } from "$lib/components/ui/sonner";
-	import { superForm } from 'sveltekit-superforms';
+	import Auth from '$lib/components/features/auth/auth.svelte'
+	import TickersForm from '$lib/components/features/tickers/form.svelte'
 
 	let { data, children } = $props();
-	const form = superForm(data.form);
-	const { form: formData } = form;
-
-	$effect(() => {
-		if (!data?.user) {
-			toast.info("This is a demo view", {
-				description: "You need to be logged in to use the app",
-				action: {
-					label: "Login",
-					onClick: () => goto('/login')
-				}
-			})
-		}
-	})
 </script>
 
 <style></style>
 
-<nav class="flex justify-end p-8">
-	{#if !data?.user}
-		<Toaster />
-		<Button href="/login">Login</Button>
-		<Button href="/signup" variant="link">Signup</Button>
-	{:else if data?.user}
-		<Button href="logout" variant="ghost">Logout</Button>
-	{/if}
-</nav>
+<Auth user={data?.user} />
 <div class="p-12 pt-0">
-	<form method="POST" action="/?/tickers">
-		<Form.Field {form} name="tickerSymbol">
-			<Form.Control let:attrs>
-				{#if data.user?.id}
-				<Form.Label>Hi, {data.user?.id}, here you can search by ticker name / symbol</Form.Label>
-				{/if}
-				{#if !data.user?.id}
-					<Form.Label>Login use search to find by ticker name / symbol</Form.Label>
-				{/if}
-					<Input {...attrs} bind:value={$formData.tickerSymbol} placeholder={`e.g. ${data.query || 'tesco'}`} />
-			</Form.Control>
-			<Form.FieldErrors />
-		</Form.Field>
-
-			{#if !data.user?.id}
-				<Tooltip.Root openDelay={100}>
-					<Tooltip.Trigger asChild let:builder>
-						<Button href="/login" builders={[builder]}>Search</Button>
-					</Tooltip.Trigger>
-				<Tooltip.Content>
-					<p>You will need to login first</p>
-				</Tooltip.Content>
-				</Tooltip.Root>
-				{:else}
-				<Form.Button>Search</Form.Button>
-			{/if}
-
-	</form>
+	<TickersForm form={data.form} id={data?.user?.id ?? ''} query={data.query ?? ''} />
 	{@render children()}
 	{#if data.positions}
 		<Card.Root class="mt-2">

@@ -6,16 +6,15 @@ import type { Company } from '../../../lib/types';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url, fetch, locals }) => {
+	const form = await superValidate(zod(plCalculationSchema));
+	const query = url.searchParams.get('q');
 	try {
-		const form = await superValidate(zod(plCalculationSchema));
-		const query = url.searchParams.get('q');
-
 		if (!query) {
 			throw new Error('No query parameter provided.');
 		}
 
 		const response = await fetch(
-			`https://financialmodelingprep.com/api/v3/search?query=${query}&limit=4&apikey=6iKfC9b2HsSekHxvoKB6yfYmwU8k5bEt`
+			`https://financialmodelingprep.com/api/v3/search?query=${query}&limit=1&apikey=6iKfC9b2HsSekHxvoKB6yfYmwU8k5bEt`
 		);
 
 		if (!response.ok) {
@@ -48,7 +47,6 @@ export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 				}
 			})
 		);
-
 		return { companies: companiesWithPrices, query, form, user: locals.user };
 	} catch (error) {
 		console.error(error);
