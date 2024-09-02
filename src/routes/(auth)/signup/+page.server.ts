@@ -4,9 +4,9 @@ import { Argon2id } from 'oslo/password';
 import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { PageServerLoad } from '../../../../.svelte-kit/types/src/routes/(app)/$types';
-import { loginSchema } from '../../../lib/schemas';
-import { lucia } from '../../../lib/server/auth';
-import * as db from '../../../lib/server/db';
+import { loginSchema } from '$lib/schemas';
+import { lucia } from '$lib/server/auth';
+import * as db from '$lib/server/db';
 
 export const load: PageServerLoad = async () => {
 	return {

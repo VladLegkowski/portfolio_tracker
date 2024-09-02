@@ -13,10 +13,10 @@
 
 	$effect(() => {
 		if (!user) {
-			toast.info("This is a demo view", {
-				description: "You need to be logged in to use the app",
+			toast.info('This is a demo view', {
+				description: 'You need to be logged in to use the app',
 				action: {
-					label: "Login",
+					label: 'Login',
 					onClick: () => goto('/login')
 				}
 			})

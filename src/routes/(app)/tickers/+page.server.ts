@@ -1,8 +1,8 @@
 import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import * as db from '../../../lib/server/db';
-import { plCalculationSchema } from '../../../lib/schemas';
-import type { Company } from '../../../lib/types';
+import * as db from '$lib/server/db';
+import { plCalculationSchema } from '$lib/schemas';
+import type { Company } from '$lib/types';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url, fetch, locals }) => {
@@ -21,9 +21,22 @@ export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 			throw new Error(`Failed to fetch company data: ${response.statusText}`);
 		}
 
-		const companies = (await response.json()) ?? [];
+		const companies: Array<{
+			symbol: string;
+			name: string;
+			currency: string;
+			stockExchange: string;
+			exchangeShortName: string;
+		}> = (await response.json()) ?? [];
 
-		const companiesWithPrices = await Promise.all(
+		const companiesWithPrices: Array<{
+			symbol: string;
+			name: string;
+			currency: string;
+			stockExchange: string;
+			exchangeShortName: string;
+			price: number;
+		}> = await Promise.all(
 			companies.map(async (company: Company) => {
 				try {
 					const priceResponse = await fetch(
@@ -47,6 +60,7 @@ export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 				}
 			})
 		);
+		console.log(companiesWithPrices);
 		return { companies: companiesWithPrices, query, form, user: locals.user };
 	} catch (error) {
 		console.error(error);

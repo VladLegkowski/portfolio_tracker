@@ -1,9 +1,9 @@
 import { redirect } from '@sveltejs/kit';
 import { fail, superValidate } from 'sveltekit-superforms';
-import { tickerSymbolSchema } from '../../lib/schemas';
+import { tickerSymbolSchema } from '$lib/schemas';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { PageServerLoad } from './$types';
-import * as db from '../../lib/server/db';
+import * as db from '$lib/server/db';
 
 export const load: PageServerLoad = async (event) => {
 	const query = event.url.searchParams.get('q');

@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { lucia } from '../../../lib/server/auth';
+import { lucia } from '$lib/server/auth';
 
 export const load: PageServerLoad = async (event) => {
 	await lucia.invalidateSession(event.locals.session?.id ?? '');

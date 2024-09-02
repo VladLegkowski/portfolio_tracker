@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Button } from '../../../lib/components/ui/button';
+	import { Button } from '$lib/components/ui/button';
 	import { superForm } from 'sveltekit-superforms';
-	import * as Card from "../../../lib/components/ui/card";
-	import { Input } from '../../../lib/components/ui/input';
-	import * as Tooltip from '../../../lib/components/ui/tooltip';
-	import * as Table from "../../../lib/components/ui/table";
-	import * as HoverCard from "../../../lib/components/ui/hover-card";
-	import * as Drawer from "../../../lib/components/ui/drawer";
-	import * as Form from "../../../lib/components/ui/form";
+	import * as Card from '$lib/components/ui/card';
+	import { Input } from '$lib/components/ui/input';
+	import * as Tooltip from '$lib/components/ui/tooltip';
+	import * as Table from '$lib/components/ui/table';
+	import * as Drawer from '$lib/components/ui/drawer';
+	import * as Form from '$lib/components/ui/form';
+	import HoverCard from '$lib/components/features/tickers/hover-card.svelte'
 	import { CircleCheck } from 'lucide-svelte';
 
 	let { data, form: actionForm } = $props();
@@ -46,20 +46,9 @@
 				<Table.Body>
 					{#each data.companies as company, i (i)}
 						<Table.Row>
-							<Table.Cell class="font-medium"><HoverCard.Root>
-								<HoverCard.Trigger
-									class="rounded-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-black"
-								>
-									{company.name}
-								</HoverCard.Trigger>
-								<HoverCard.Content class="w-100 p-4 bg-white shadow-md">
-									<div><span class="text-sm font-semibold text-gray-500">Symbol:</span> {company.symbol}</div>
-									<div><span class="text-sm font-semibold text-gray-500">Name:</span> {company.name}</div>
-									<div><span class="text-sm font-semibold text-gray-500">Currency:</span> {company.currency}</div>
-									<div><span class="text-sm font-semibold text-gray-500">Stock Exchange:</span> {company.stockExchange}</div>
-									<div><span class="text-sm font-semibold text-gray-500">Exchange Short Name:</span> {company.exchangeShortName}</div>
-								</HoverCard.Content>
-							</HoverCard.Root></Table.Cell>
+							<Table.Cell class="font-medium">
+								<HoverCard company={company} />
+							</Table.Cell>
 							<Table.Cell class="font-medium">{company.symbol}</Table.Cell>
 							<Table.Cell class="font-medium">{company.currency}</Table.Cell>
 							<Table.Cell class="font-medium">{company.exchangeShortName}</Table.Cell>

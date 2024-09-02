@@ -29,5 +29,10 @@ export default [
 	},
 	{
 		ignores: ['build/', '.svelte-kit/', 'dist/']
+	},
+	{
+		rules: {
+			quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: false }]
+		}
 	}
 ];

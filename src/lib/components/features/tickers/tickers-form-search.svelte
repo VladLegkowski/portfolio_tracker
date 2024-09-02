@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { superForm, type SuperValidated } from 'sveltekit-superforms';
-	import * as Form from "../../ui/form";
+	import * as Form from '../../ui/form';
 	import { Button } from '../../ui/button';
 	import { Input } from '../../ui/input';
-	import * as Tooltip from "../../ui/tooltip";
+	import * as Tooltip from '../../ui/tooltip';
 
 	type Props =  {
 		id: string;
