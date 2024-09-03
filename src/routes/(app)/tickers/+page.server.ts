@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 		}
 
 		const response = await fetch(
-			`https://financialmodelingprep.com/api/v3/search?query=${query}&limit=1&apikey=6iKfC9b2HsSekHxvoKB6yfYmwU8k5bEt`
+			`https://financialmodelingprep.com/api/v3/search?query=${query}&limit=1&apikey=iaOInAu5KJYQmmxp5RvXGn3wyJp92yMz`
 		);
 
 		if (!response.ok) {
@@ -34,7 +34,7 @@ export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 			companies.map(async (company) => {
 				try {
 					const priceResponse = await fetch(
-						`https://financialmodelingprep.com/api/v3/quote-short/${company.symbol}?apikey=6iKfC9b2HsSekHxvoKB6yfYmwU8k5bEt`
+						`https://financialmodelingprep.com/api/v3/quote-short/${company.symbol}?apikey=iaOInAu5KJYQmmxp5RvXGn3wyJp92yMz`
 					);
 
 					if (!priceResponse.ok) {
