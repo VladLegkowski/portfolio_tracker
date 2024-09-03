@@ -2,8 +2,7 @@ import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import * as db from '$lib/server/db';
 import { plCalculationSchema } from '$lib/schemas';
-import type { Company } from '$lib/types';
-import type { ActionData, PageServerLoad } from './$types';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 	const form = await superValidate(zod(plCalculationSchema));
