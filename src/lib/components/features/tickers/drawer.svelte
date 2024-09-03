@@ -71,6 +71,11 @@ $effect(() => {
 						<Input {...attrs} type="hidden" value={company.symbol} />
 					</Form.Control>
 				</Form.Field>
+				<Form.Field {form} name="currency">
+					<Form.Control let:attrs>
+						<Input {...attrs} type="hidden" value={company.currency} />
+					</Form.Control>
+				</Form.Field>
 			</form>
 			<Drawer.Footer>
 				<Button type="submit" form="plCalculation">Submit</Button>

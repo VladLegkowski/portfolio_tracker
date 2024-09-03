@@ -9,7 +9,7 @@ export type Company = {
 	currency: string;
 	stockExchange: string;
 	exchangeShortName: string;
-	price?: number;
+	price: number | undefined;
 };
 
 export type Position = {
@@ -20,11 +20,13 @@ export type Position = {
 	break_even_price: number;
 	realised_pl: number;
 	created_at: Date;
+	price: number;
+	currency: string;
 };
 
 export type Data = {
-	positions: Position[];
-	companies: Company[];
+	positions?: Position[] | undefined;
+	companies: Company[] | undefined;
 	query: string;
 	form: SuperValidated<
 		{
@@ -32,6 +34,7 @@ export type Data = {
 			quantity: number;
 			breakEvenPrice: number;
 			realisedPL: number;
+			currency: string;
 		},
 		any,
 		{}

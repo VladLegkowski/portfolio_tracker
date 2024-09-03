@@ -7,12 +7,12 @@
 
 	type Props =  {
 		id: string;
-		query: string;
-		form: SuperValidated<{ tickerSymbol: string }, never, { tickerSymbol: string }>;
+		query: string | null | undefined;
+		form: SuperValidated<{   tickerSymbol: string; }, any, {   tickerSymbol: string; }> | undefined
 	};
 
 	let { id, query, form: dataForm }: Props = $props()
-	const form = superForm(dataForm);
+	const form = superForm(dataForm ?? { tickerSymbol: '' });
 	const { form: formData } = form;
 </script>
 

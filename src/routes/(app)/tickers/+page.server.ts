@@ -37,7 +37,7 @@ export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 			exchangeShortName: string;
 			price: number;
 		}> = await Promise.all(
-			companies.map(async (company: Company) => {
+			companies.map(async (company) => {
 				try {
 					const priceResponse = await fetch(
 						`https://financialmodelingprep.com/api/v3/quote-short/${company.symbol}?apikey=6iKfC9b2HsSekHxvoKB6yfYmwU8k5bEt`
@@ -72,7 +72,7 @@ export const actions = {
 		if (!form.valid) {
 			return fail(400, { form });
 		}
-		const { symbol, quantity, breakEvenPrice, realisedPL } = form.data;
+		const { symbol, quantity, breakEvenPrice, realisedPL, currency } = form.data;
 		await db.createPosition({
 			symbol,
 			quantity,

@@ -1,4 +1,5 @@
 import type { Position } from '../types';
+
 export const mockPositions: Position[] = [
 	{
 		id: 153,
@@ -7,7 +8,9 @@ export const mockPositions: Position[] = [
 		quantity: 15,
 		break_even_price: 130.45,
 		realised_pl: 0,
-		created_at: new Date('2024-08-30T11:44:52.291Z')
+		created_at: new Date('2024-08-30T11:44:52.291Z'),
+		price: 182.54,
+		currency: 'USD'
 	},
 	{
 		id: 154,
@@ -16,7 +19,9 @@ export const mockPositions: Position[] = [
 		quantity: 38,
 		break_even_price: 62.381,
 		realised_pl: 0,
-		created_at: new Date('2024-08-30T11:45:50.185Z')
+		created_at: new Date('2024-08-30T11:45:50.185Z'),
+		price: 58.73,
+		currency: 'USD'
 	},
 	{
 		id: 155,
@@ -25,7 +30,9 @@ export const mockPositions: Position[] = [
 		quantity: 145,
 		break_even_price: 100.27,
 		realised_pl: 0,
-		created_at: new Date('2024-08-30T11:46:25.531Z')
+		created_at: new Date('2024-08-30T11:46:25.531Z'),
+		price: 138.21,
+		currency: 'USD'
 	},
 	{
 		id: 156,
@@ -34,6 +41,8 @@ export const mockPositions: Position[] = [
 		quantity: 155,
 		break_even_price: 99.99,
 		realised_pl: 0,
-		created_at: new Date('2024-08-30T11:48:45.871Z')
+		created_at: new Date('2024-08-30T11:48:45.871Z'),
+		price: 245.01,
+		currency: 'USD'
 	}
 ];

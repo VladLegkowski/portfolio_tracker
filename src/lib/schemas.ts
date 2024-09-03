@@ -23,7 +23,8 @@ export const plCalculationSchema = z.object({
 	realisedPL: z
 		.number()
 		.refine((val) => !isNaN(val), 'Realised P/L must be a numerical value')
-		.default(0)
+		.default(0),
+	currency: z.string().min(2, 'Currency cant be empty')
 });
 
 export const loginSchema = z.object({

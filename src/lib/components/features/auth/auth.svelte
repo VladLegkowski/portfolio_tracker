@@ -6,7 +6,7 @@
 	import { toast } from 'svelte-sonner';
 
 	type Props = {
-		user: User | null
+		user: User | null | undefined;
 	}
 
 	let { user }: Props = $props();

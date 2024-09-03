@@ -12,9 +12,9 @@
 
 <style></style>
 
-<Auth user={data?.user} />
+<Auth user={data.user} />
 <div class="p-12 pt-0">
-	<TickersSearchForm form={data.form} id={data?.user?.id ?? ''} query={data.query ?? ''} />
+	<TickersSearchForm form={data.form} id={data?.user?.id ?? ''} query={data.query} />
 	{@render children()}
 	{#if data.positions}
 		<CurrentPositions positions={data.positions} />
