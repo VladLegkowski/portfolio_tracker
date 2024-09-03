@@ -72,7 +72,7 @@ export const actions = {
 		if (!form.valid) {
 			return fail(400, { form });
 		}
-		const { symbol, quantity, breakEvenPrice, realisedPL, currency } = form.data;
+		const { symbol, quantity, breakEvenPrice, realisedPL } = form.data;
 		await db.createPosition({
 			symbol,
 			quantity,
