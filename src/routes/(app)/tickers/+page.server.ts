@@ -3,7 +3,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import * as db from '$lib/server/db';
 import { plCalculationSchema } from '$lib/schemas';
 import type { Company } from '$lib/types';
-import type { PageServerLoad } from './$types';
+import type { ActionData, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 	const form = await superValidate(zod(plCalculationSchema));
@@ -60,7 +60,6 @@ export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 				}
 			})
 		);
-		console.log(companiesWithPrices);
 		return { companies: companiesWithPrices, query, form, user: locals.user };
 	} catch (error) {
 		console.error(error);

@@ -1,3 +1,6 @@
+import type { User } from 'lucia';
+import type { SuperValidated } from 'sveltekit-superforms';
+
 export type DrawerState = boolean;
 
 export type Company = {
@@ -6,6 +9,7 @@ export type Company = {
 	currency: string;
 	stockExchange: string;
 	exchangeShortName: string;
+	price?: number;
 };
 
 export type Position = {
@@ -16,4 +20,21 @@ export type Position = {
 	break_even_price: number;
 	realised_pl: number;
 	created_at: Date;
+};
+
+export type Data = {
+	positions: Position[];
+	companies: Company[];
+	query: string;
+	form: SuperValidated<
+		{
+			symbol: string;
+			quantity: number;
+			breakEvenPrice: number;
+			realisedPL: number;
+		},
+		any,
+		{}
+	>;
+	user: User | null;
 };

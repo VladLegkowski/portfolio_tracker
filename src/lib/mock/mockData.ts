@@ -1,4 +1,5 @@
-export const mockPositions = [
+import type { Position } from '../types';
+export const mockPositions: Position[] = [
 	{
 		id: 153,
 		user_id: 'ixgoe5w5dug6tgd',

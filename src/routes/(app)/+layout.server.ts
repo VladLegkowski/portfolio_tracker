@@ -9,8 +9,8 @@ import { zod } from 'sveltekit-superforms/adapters';
 export const load: LayoutServerLoad = async (event) => {
 	const query = event.url.searchParams.get('q');
 	const form = await superValidate(event, zod(tickerSymbolSchema));
-	const positions: Position[] = event.locals.user?.id
-		? await db.getPositions(event.locals.user?.id)
+	const positions = event.locals.user?.id
+		? ((await db.getPositions(event.locals.user?.id)) as unknown as Position[])
 		: mockPositions;
 	return { form, query, positions, user: event.locals.user };
 };

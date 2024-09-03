@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/card';
-	import * as Table from '$lib/components/ui/table';
-	import type { Position } from '$lib/types';
+	import * as Card from '../../ui/card';
+	import * as Table from '../../ui/table';
+	import type { Position } from '../../../types';
 
 	type Positions = Position[]
 
