@@ -7,6 +7,7 @@ import type { PageServerLoad } from './$types';
 export const load: PageServerLoad = async ({ url, fetch, locals }) => {
 	const form = await superValidate(zod(plCalculationSchema));
 	const query = url.searchParams.get('q');
+
 	try {
 		if (!query) {
 			throw new Error('No query parameter provided.');
