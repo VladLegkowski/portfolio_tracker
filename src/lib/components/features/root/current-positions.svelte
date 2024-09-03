@@ -28,7 +28,7 @@
 		positions: Position[]
 	}
 
-	const { positions } = $props<Props>();
+	const { positions }: Props = $props();
 </script>
 
 <Card.Root class="mt-2">
