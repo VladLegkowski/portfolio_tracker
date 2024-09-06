@@ -21,7 +21,7 @@
 		</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<form method="POST" use:enhance action="?/signup">
+		<form method="POST" use:enhance action="?/login">
 			<Form.Field {form} name="email">
 				<Form.Control let:attrs>
 					<Form.Label>Email address</Form.Label>

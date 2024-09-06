@@ -1,7 +1,5 @@
 <script lang="ts">
 	import '../../app.css';
-	import * as Table from '$lib//components/ui/table';
-	import * as Card from '$lib/components/ui/card';
 	import Auth from '$lib/components/features/auth/auth.svelte'
 	import TickersSearchForm from '../../lib/components/features/root/tickers-form-search.svelte'
 	import CurrentPositions from '../../lib/components/features/root/current-positions.svelte'
