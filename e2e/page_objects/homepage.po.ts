@@ -8,10 +8,4 @@ export class HomePage {
 		await this.world.page.goto(`${this.world.parameters.appUrl}`);
 		await expect(this.world.page).toHaveURL(this.world.parameters.appUrl);
 	}
-
-	async hasRunningText(): Promise<boolean> {
-		return this.world.page.isVisible(
-			'//span[text()="cucumber-playwright-starter app is running!"]'
-		);
-	}
 }

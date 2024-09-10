@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 2020168708
+              "duration": 5081422542
             }
           },
           {
@@ -23,11 +23,11 @@
             "line": 5,
             "name": "I am on the homepage",
             "match": {
-              "location": "e2e/steps/app.steps.ts:5"
+              "location": "steps/app.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 184498624
+              "duration": 161129541
             }
           },
           {
@@ -35,7 +35,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 109005999
+              "duration": 116427249
             }
           }
         ],
@@ -53,6 +53,6 @@
     "keyword": "Feature",
     "name": "Homepage Feature Testing",
     "tags": [],
-    "uri": "e2e/features/app.feature"
+    "uri": "features/app.feature"
   }
 ]
