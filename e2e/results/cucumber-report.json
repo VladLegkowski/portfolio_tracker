@@ -1,0 +1,58 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "homepage-feature-testing;loads-homepage",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Loads homepage",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2020168708
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I am on the homepage",
+            "match": {
+              "location": "e2e/steps/app.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 184498624
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 109005999
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@test",
+            "line": 3
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "homepage-feature-testing",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Homepage Feature Testing",
+    "tags": [],
+    "uri": "e2e/features/app.feature"
+  }
+]
